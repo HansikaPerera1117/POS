@@ -208,7 +208,7 @@ public class PlaceOrderFormController {
     }
 
     public String generateNewOrderId() {
-        try {
+       /* try {
             Connection connection = DBConnection.getDbConnection().getConnection();
             Statement stm = connection.createStatement();
             ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
@@ -219,7 +219,10 @@ public class PlaceOrderFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return "OID-001";
+        return "OID-001";*/
+
+        PlaceOrderDAOImpl placeOrderDAO = new PlaceOrderDAOImpl();
+        return placeOrderDAO.generateNewOrderId();
     }
 
     private void loadAllCustomerIds() {
