@@ -2,8 +2,12 @@ package dao;
 
 import db.DBConnection;
 import javafx.scene.control.Alert;
+import model.CustomerDTO;
+import model.ItemDTO;
 
+import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class PlaceOrderDAOImpl {
     public void searchCustomer(){
@@ -35,5 +39,34 @@ public class PlaceOrderDAOImpl {
             e.printStackTrace();
         }
         return "OID-001";
+    }
+
+    public ArrayList<CustomerDTO> loadAllCustomerIds() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stm = connection.createStatement();
+        ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
+        ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
+        while (rst.next()) {
+            String id = rst.getString(1);
+            String name = rst.getString(2);
+            String address = rst.getString(3);
+            allCustomers.add(new CustomerDTO(id, name, address));
+        }
+        return allCustomers;
+    }
+
+    public ArrayList<ItemDTO> loadAllItemCodes() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stm = connection.createStatement();
+        ResultSet rst = stm.executeQuery("SELECT * FROM Item");
+        ArrayList<ItemDTO> allItems = new ArrayList<>();
+        while (rst.next()) {
+            String code = rst.getString(1);
+            String description = rst.getString(2);
+            BigDecimal price = rst.getBigDecimal(3);
+            int qtyOnHand = rst.getInt(4);
+            allItems.add(new ItemDTO(code, description, price, qtyOnHand));
+        }
+        return allItems;
     }
 }

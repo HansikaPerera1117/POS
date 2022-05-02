@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import model.CustomerDTO;
 import model.ItemDTO;
 import model.OrderDetailDTO;
+import view.tdm.CustomerTM;
+import view.tdm.ItemTM;
 import view.tdm.OrderDetailTM;
 
 import java.io.IOException;
@@ -27,6 +29,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -227,12 +230,15 @@ public class PlaceOrderFormController {
 
     private void loadAllCustomerIds() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
+          /*  Connection connection = DBConnection.getDbConnection().getConnection();
             Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
+            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");*/
 
-            while (rst.next()) {
-                cmbCustomerId.getItems().add(rst.getString("id"));
+            PlaceOrderDAOImpl placeOrderDAO = new PlaceOrderDAOImpl();
+            ArrayList<CustomerDTO> customerDTOS = placeOrderDAO.loadAllCustomerIds();
+
+            for (CustomerDTO customer : customerDTOS) {
+                cmbCustomerId.getItems().add(customer.getId());
             }
 
         } catch (SQLException e) {
@@ -245,12 +251,17 @@ public class PlaceOrderFormController {
     private void loadAllItemCodes() {
         try {
             /*Get all items*/
-            Connection connection = DBConnection.getDbConnection().getConnection();
+          /*  Connection connection = DBConnection.getDbConnection().getConnection();
             Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
-            while (rst.next()) {
-                cmbItemCode.getItems().add(rst.getString("code"));
+            ResultSet rst = stm.executeQuery("SELECT * FROM Item");*/
+
+            PlaceOrderDAOImpl placeOrderDAO = new PlaceOrderDAOImpl();
+            ArrayList<ItemDTO> itemDTOS = placeOrderDAO.loadAllItemCodes();
+
+            for (ItemDTO item : itemDTOS) {
+                cmbItemCode.getItems().add(item.getCode());
             }
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
