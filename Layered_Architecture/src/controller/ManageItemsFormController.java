@@ -241,16 +241,20 @@ public class ManageItemsFormController {
 
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
+       /* Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
         pstm.setString(1, code);
-        return pstm.executeQuery().next();
+        return pstm.executeQuery().next();*/
+
+        ItemDAOImpl itemDAO = new ItemDAOImpl();
+        return itemDAO.existItem(code);
+
     }
 
 
     private String generateNewId() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
+            /*Connection connection = DBConnection.getDbConnection().getConnection();
             ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
             if (rst.next()) {
                 String id = rst.getString("code");
@@ -258,7 +262,11 @@ public class ManageItemsFormController {
                 return String.format("I00-%03d", newItemId);
             } else {
                 return "I00-001";
-            }
+            }*/
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            return itemDAO.generateNewId();
+
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
