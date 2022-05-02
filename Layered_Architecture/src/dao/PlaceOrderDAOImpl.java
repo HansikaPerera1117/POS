@@ -17,4 +17,10 @@ public class PlaceOrderDAOImpl {
         pstm.setString(1, id);
         return pstm.executeQuery().next();
     }
+    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
+        pstm.setString(1, code);
+        return pstm.executeQuery().next();
+    }
 }
