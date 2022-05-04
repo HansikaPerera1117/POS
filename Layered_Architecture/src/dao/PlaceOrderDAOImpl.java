@@ -10,7 +10,23 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class PlaceOrderDAOImpl {
-    public void searchCustomer(){
+    public CustomerDTO  searchCustomer(String newValue) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+        pstm.setString(1, newValue + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        return  new CustomerDTO(newValue + "", rst.getString("name"), rst.getString("address"));
+
+    }
+
+    public ItemDTO findItem(String newItemCode) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
+        pstm.setString(1, newItemCode + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        return new ItemDTO(newItemCode + "", rst.getString("description"), rst.getBigDecimal("unitPrice"), rst.getInt("qtyOnHand"));
 
     }
 
@@ -69,4 +85,9 @@ public class PlaceOrderDAOImpl {
         }
         return allItems;
     }
+
+    public void saveOrder(){
+
+    }
+
 }
