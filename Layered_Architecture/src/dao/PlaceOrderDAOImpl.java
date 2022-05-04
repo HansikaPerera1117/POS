@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class PlaceOrderDAOImpl {
+public class PlaceOrderDAOImpl implements PlaceOrderDAO{
     public CustomerDTO  searchCustomer(String newValue) throws SQLException, ClassNotFoundException {
         /*Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
