@@ -1,5 +1,6 @@
 package dao;
 
+import db.DBConnection;
 import model.CustomerDTO;
 
 import java.sql.*;
@@ -44,6 +45,23 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO,String> {
 
         return CrudUtil.execute("UPDATE Customer SET name=?, address=? WHERE id=?",dto.getName(),dto.getAddress(),dto.getId());
     }
+
+    @Override
+    public CustomerDTO search(String id) throws SQLException, ClassNotFoundException {
+        /*Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+        pstm.setString(1, newValue + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();*/
+
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Customer WHERE id=?", id);
+        if (rst.next()) {
+            return new CustomerDTO(rst.getString(1), rst.getString(2), rst.getString(3));
+        }
+        return null;
+
+    }
+
     @Override
     public boolean exist(String id) throws SQLException, ClassNotFoundException {
         /*Connection connection = DBConnection.getDbConnection().getConnection();
