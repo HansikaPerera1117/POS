@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * @author : Sanu Vithanage
- * @since : 0.1.0
- **/
 
 public class OrderDTO  {
     private String orderId;
@@ -18,6 +14,13 @@ public class OrderDTO  {
 
     public OrderDTO() {
     }
+
+    public OrderDTO(String orderId, LocalDate orderDate, String customerId) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.customerId = customerId;
+    }
+
 
     public OrderDTO(String orderId, LocalDate orderDate, String customerId, String customerName, BigDecimal orderTotal) {
         this.orderId = orderId;
