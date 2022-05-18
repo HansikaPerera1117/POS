@@ -396,7 +396,6 @@ public class PlaceOrderFormController {
             PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
             stm.setString(1, orderId);*/
          //   Connection connection = DBConnection.getDbConnection().getConnection();
-
             /*if order id already exist*/
          //   if (orderDTO.exist(orderId)) {
 //
@@ -432,13 +431,11 @@ public class PlaceOrderFormController {
 //                //Search & Update Item
                // ItemDTO item = findItem(detail.getItemCode());
               //  item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
-
                 /*PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
                 pstm.setString(1, item.getDescription());
                 pstm.setBigDecimal(2, item.getUnitPrice());
                 pstm.setInt(3, item.getQtyOnHand());
                 pstm.setString(4, item.getCode());*/
-
               //  boolean update = itemDAO.update(new ItemDTO(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
 
                // if (!update) {
