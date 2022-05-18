@@ -1,5 +1,6 @@
 package controller;
 
+import bo.ItemBO;
 import bo.ItemBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -43,6 +44,7 @@ public class ManageItemsFormController {
     public JFXButton btnAddNewItem;
 
     //private ItemDAO itemDAO = new ItemDAOImpl();
+      private ItemBO itemBO = new ItemBOImpl();
 
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -84,7 +86,6 @@ public class ManageItemsFormController {
 
             //ArrayList<ItemDTO> allItems = itemDAO.getAll();
 
-            ItemBOImpl itemBO = new ItemBOImpl();
             ArrayList<ItemDTO> allItems = itemBO.getAllItems();
 
             for (ItemDTO item : allItems) {
@@ -153,7 +154,6 @@ public class ManageItemsFormController {
 
             //itemDAO.delete(code);
 
-            ItemBOImpl itemBO = new ItemBOImpl();
             itemBO.deleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -205,7 +205,6 @@ public class ManageItemsFormController {
 
                 //itemDAO.save(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
-                ItemBOImpl itemBO = new ItemBOImpl();
                 itemBO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
@@ -233,8 +232,7 @@ public class ManageItemsFormController {
 
               //  itemDAO.update(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
-                ItemBOImpl itemBO = new ItemBOImpl();
-                itemBO.updateItem(new ItemDTO(code, description, unitPrice, qtyOnHand)); 
+                itemBO.updateItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);
@@ -260,7 +258,6 @@ public class ManageItemsFormController {
 
         //return itemDAO.exist(code);
 
-        ItemBOImpl itemBO = new ItemBOImpl();
         return itemBO.itemExist(code);
 
     }
@@ -280,7 +277,6 @@ public class ManageItemsFormController {
 
           //  return itemDAO.generateNewID();
 
-            ItemBOImpl itemBO = new ItemBOImpl();
             return itemBO.generateNewItemCode();
 
 

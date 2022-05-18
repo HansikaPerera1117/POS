@@ -1,5 +1,6 @@
 package controller;
 
+import bo.CustomerBO;
 import bo.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -44,6 +45,7 @@ public class ManageCustomersFormController {
 
 
    // private CustomerDAO customerDAO = new CustomerDAOImpl();
+      private CustomerBO customerBO = new CustomerBOImpl();
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -82,7 +84,6 @@ public class ManageCustomersFormController {
 
            // ArrayList<CustomerDTO> allCustomers = customerDAO.getAll();
 
-            CustomerBOImpl customerBO = new CustomerBOImpl();
             ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
             for (CustomerDTO customer : allCustomers) {
@@ -167,7 +168,6 @@ public class ManageCustomersFormController {
 
                // customerDAO.save(new CustomerDTO(id,name,address));
 
-                CustomerBOImpl customerBO = new CustomerBOImpl();
                 customerBO.saveCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -193,7 +193,6 @@ public class ManageCustomersFormController {
 
                // customerDAO.update(new CustomerDTO(name,address,id));
 
-                CustomerBOImpl customerBO = new CustomerBOImpl();
                 customerBO.updateCustomer(new CustomerDTO(name,address,id));
 
             } catch (SQLException e) {
@@ -220,7 +219,6 @@ public class ManageCustomersFormController {
 
        // return customerDAO.exist(id);
 
-        CustomerBOImpl customerBO = new CustomerBOImpl();
         return customerBO.customerExist(id);
     }
 
@@ -239,7 +237,6 @@ public class ManageCustomersFormController {
 
            // customerDAO.delete(id);
 
-            CustomerBOImpl customerBO = new CustomerBOImpl();
             customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -267,7 +264,6 @@ public class ManageCustomersFormController {
 
             //return customerDAO.generateNewID();
 
-            CustomerBOImpl customerBO = new CustomerBOImpl();
             return customerBO.generateNewCustomerID();
 
         } catch (SQLException e) {
