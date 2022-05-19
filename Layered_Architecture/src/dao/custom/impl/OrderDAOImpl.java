@@ -2,7 +2,7 @@ package dao.custom.impl;
 
 import dao.CrudUtil;
 import dao.custom.OrderDAO;
-import model.OrderDTO;
+import dto.OrderDTO;
 
 import java.sql.*;
 import java.util.ArrayList;

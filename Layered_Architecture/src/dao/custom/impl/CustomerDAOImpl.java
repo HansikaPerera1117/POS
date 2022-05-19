@@ -2,7 +2,7 @@ package dao.custom.impl;
 
 import dao.CrudUtil;
 import dao.custom.CustomerDAO;
-import model.CustomerDTO;
+import dto.CustomerDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class CustomerDAOImpl implements CustomerDAO {
        /* Connection connection = DBConnection.getDbConnection().getConnection();
         ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");*/
 
-        ResultSet rst= CrudUtil.execute("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
+        ResultSet rst = CrudUtil.execute("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
         if (rst.next()) {
             String id = rst.getString("id");
             int newCustomerId = Integer.parseInt(id.replace("C00-", "")) + 1;

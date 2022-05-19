@@ -1,41 +1,29 @@
-package model;
+package entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @author : Sanu Vithanage
- * @since : 0.1.0
- **/
-
-public class OrderDetailDTO implements Serializable {
-    private String oid;
+public class OrderDetails {
+    private String orderId;
     private String itemCode;
     private int qty;
     private BigDecimal unitPrice;
 
-    public OrderDetailDTO() {
+    public OrderDetails() {
     }
 
-    public OrderDetailDTO(String itemCode, int qty, BigDecimal unitPrice) {
+    public OrderDetails(String orderId, String itemCode, int qty, BigDecimal unitPrice) {
+        this.orderId = orderId;
         this.itemCode = itemCode;
         this.qty = qty;
         this.unitPrice = unitPrice;
     }
 
-    public OrderDetailDTO(String oid, String itemCode, int qty, BigDecimal unitPrice) {
-        this.oid = oid;
-        this.itemCode = itemCode;
-        this.qty = qty;
-        this.unitPrice = unitPrice;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(String oid) {
-        this.oid = oid;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getItemCode() {
@@ -64,8 +52,8 @@ public class OrderDetailDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderDetailDTO{" +
-                "oid='" + oid + '\'' +
+        return "OrderDetails{" +
+                "orderId='" + orderId + '\'' +
                 ", itemCode='" + itemCode + '\'' +
                 ", qty=" + qty +
                 ", unitPrice=" + unitPrice +

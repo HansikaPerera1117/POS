@@ -2,7 +2,7 @@ package dao.custom.impl;
 
 import dao.CrudUtil;
 import dao.custom.ItemDAO;
-import model.ItemDTO;
+import dto.ItemDTO;
 
 import java.math.BigDecimal;
 import java.sql.*;
